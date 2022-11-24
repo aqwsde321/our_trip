@@ -1,0 +1,9 @@
+/*common*/
+
+.sub_header {
+    background: #c0df9f;
+
+}
+.btnSet {position:relative; margin:20px 0; text-align:center; overflow:hidden;}
+.btn {font-size:14px; text-decoration:none !important; white-space:nowrap; display:inline-block; vertical-align:baseline; position:relative; cursor:pointer; padding:4px 20px; min-width:64px; border:2px solid #87b350e6; color:#fff !important; margin:0 2px; text-align:center; font-weight:bold; border-radius:50px; background-color:#87b350e6;}
+.btnSet .btn:hover{border:2px solid #579408; background:#579408; color:#fff !important;  text-decoration:none !important;}

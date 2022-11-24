@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.util.CategoryMapper">
+
+	<!-- 카테고리에서 선택한 해쉬태그랑 지역정보 가져오기 -->
+	<select id="categoryList" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.util.CategoryVO">
+		SELECT pcategory.hashtag_no, phashtag.hashtag_name, pcategory.region_no, pregion.region_name  
+		FROM pcategory LEFT OUTER JOIN phashtag ON pcategory.hashtag_no = phashtag.hashtag_no 
+					   LEFT OUTER JOIN pregion ON pcategory.region_no = pregion.region_no 
+		WHERE pcategory.board_name = #{board_name} AND pcategory.board_no = #{board_no}
+	</select>
+	
+	<!-- 해쉬코드 등록 -->
+ 	<insert id="hashInsert" parameterType="a.b.c.dataro.util.CategoryVO" >
+		INSERT INTO pcategory (
+			hashtag_no, board_name, board_no
+		) VALUES (
+			#{hashtag_no}, #{board_name}, #{board_no} 
+		)
+	</insert>
+	
+	<!-- 해쉬코드 가져오기(출력) -->
+	<select id="hash"  resultType="a.b.c.dataro.util.CategoryVO">
+		SELECT * FROM phashtag ORDER BY hashtag_no
+	</select>
+	
+	<!-- 해쉬,지역코드 수정(삭제후 다시 등록하는방식) -->
+	<delete id="categoryDel" parameterType="a.b.c.dataro.util.CategoryVO">
+		DELETE FROM pcategory WHERE board_no = #{board_no}
+	</delete>
+
+	<!-- 글쓰기 지역정보 대분류 출력 -->
+	<select id="regionSelect" resultType="a.b.c.dataro.util.CategoryVO">
+	 	SELECT DISTINCT SUBSTRING(region_name, 1, 2) AS region_name FROM pregion
+	</select>
+	
+	<!-- 글쓰기 지역정보 소분류 출력 -->
+	<select id="regionDetail" parameterType="String" resultType="a.b.c.dataro.util.CategoryVO">
+		SELECT region_no, SUBSTRING(region_name, 4) AS region_name FROM pregion WHERE region_name LIKE "${rs}%"
+	</select>
+	
+	<!-- 글쓰기 지역번호 카테고리테이블에 등록 -->
+	<insert id="regionInsert" parameterType="a.b.c.dataro.util.CategoryVO">
+		INSERT INTO pcategory (
+			board_name, board_no, region_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{region_no}
+		)
+	</insert>
+	
+	<!--  이 줄 밑으로 plike, pdislike table -->
+	<!-- 게시글 좋아요 버튼 누르기 -->
+	<insert id="clickBoardLike" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		INSERT INTO plike (
+			board_name, board_no, member_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{member_no}
+		)
+	</insert>
+	
+	<!-- 좋아요 누른것 취소 -->
+	<delete id="likeBack" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		DELETE FROM plike WHERE board_name = #{board_name} AND board_no = #{board_no} AND member_no = #{member_no}
+	</delete>
+	
+	<!-- 게시글 싫어요 버튼 누르기 -->
+	<insert id="clickDislike" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		INSERT INTO pdislike (
+			board_name, board_no, member_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{member_no}
+		)
+	</insert>
+	
+	<!-- 싫어요 누른것 취소 -->
+	<delete id="dislikeBack" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		DELETE FROM pdislike WHERE board_name = #{board_name} AND board_no = #{board_no} AND member_no = #{member_no}
+	</delete>
+	
+	<!-- 댓글 좋아요 버튼 누르기 -->
+	<insert id="clickReplyLike" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		INSERT INTO plike (
+			board_name, board_no, reply_no, member_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{reply_no}, #{member_no}
+		)
+	</insert>
+	
+	<!-- 좋아요 버튼 눌렀는지 확인 -->
+	<select id="likeCheck" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="int">
+		SELECT COUNT(*) FROM plike WHERE board_name = #{board_name} AND board_no = #{board_no} AND member_no = #{member_no}
+	</select>
+	
+	<!-- 싫어요 버튼 눌렀는지 확인 -->
+	<select id="dislikeCheck" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="int">
+		SELECT COUNT(*) FROM pdislike WHERE board_name = #{board_name} AND board_no = #{board_no} AND member_no = #{member_no}
+	</select>
+	
+</mapper>

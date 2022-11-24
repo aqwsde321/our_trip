@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.omok.OmokMapper">
+	<select id="selectList" parameterType="int" resultType="a.b.c.omok.OmokDTO">
+		SELECT * FROM omokt WHERE roomnum = #{roomNum} ORDER BY dolnum
+	</select>
+	
+	<select id="select" parameterType="int" resultType="a.b.c.omok.OmokDTO">
+		SELECT * FROM omokt WHERE roomnum = #{roomNum} ORDER BY dolnum DESC LIMIT 1
+	</select>
+	
+	<select id="count" parameterType="int" resultType="int">
+		SELECT count(*) FROM omokt WHERE roomnum = #{roomNum}
+	</select>
+	  
+	<insert id="insert" parameterType="a.b.c.omok.OmokDTO">
+		INSERT INTO omokt (
+			roomnum, dolnum, x, y, win
+		) VALUES (
+			#{dbRoomNum}, #{dolNum}, #{x}, #{y}, #{win}
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+	     DELETE FROM omokt WHERE roomnum = #{roomNum}
+	</delete>
+</mapper>

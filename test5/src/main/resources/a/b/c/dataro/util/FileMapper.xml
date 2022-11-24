@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.util.FileMapper">
+	
+	<!-- 여행게시판 글쓰기 사진 등록 -->
+	<insert id="fileUpload" parameterType="a.b.c.dataro.util.FileVO" >
+		INSERT INTO pfile (
+			board_name, board_no, filename_org, filename_server, course_no
+		) VALUES (
+			'여행게시판', #{board_no}, #{filename_org}, #{filename_server}, #{course_no}
+		)
+	</insert>
+	
+	<!-- 여행게시판 글수정 사진 불러오기 -->
+	<select id="fileUpdate" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.util.FileVO">
+		SELECT * FROM pfile WHERE board_no=${board_no} AND course_no=${course_no}
+	</select>
+	
+	<delete id="fileDelDB" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		DELETE FROM pfile WHERE board_name = #{board_name} AND board_no = #{board_no}
+	</delete>
+	
+	<!-- 여행게시판 글수정 사진 불러오기 -->
+	<select id="getServerFileName" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="String">
+		SELECT filename_server FROM pfile WHERE board_no=${board_no}
+	</select>
+</mapper>

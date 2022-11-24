@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.boardTravel.BoardMapper">
+
+	<select id="list" resultType="a.b.c.dataro.boardTravel.BoardVO"> 
+		SELECT
+		 * 
+ 		,(SELECT COUNT(*) FROM plike WHERE pboard.board_no = plike.board_no) AS likecount    -- 좋아요 갯수 --
+		,(SELECT COUNT(reply_no) FROM preply WHERE pboard.board_no = preply.board_no) AS replycount --  댓글 갯수 --
+		,(SELECT filename_server  FROM pfile WHERE pboard.board_name='여행게시판'
+			AND pboard.board_no = pfile.board_no ORDER BY pfile.course_no LIMIT 1) AS filename_server -- 글쓰기할떄 넣은 사진 메인페이지에 불러오기 --
+		FROM pboard WHERE board_name = '여행게시판'
+			<if test ="sword != '' and sword != null"> 
+				AND (title LIKE '%${sword}%' OR id LIKE '%${sword}%')
+			</if>
+			<if test = "stag != '' and stag != null">
+				AND board_no IN (SELECT board_no FROM pcategory WHERE hashtag_no = #{stag} AND board_name='여행게시판')
+			</if>
+			<if test = "sregion != '' and sregion != null">
+				AND board_no IN (SELECT board_no FROM pcategory WHERE region_no = #{sregion} AND board_name='여행게시판')
+			</if>
+		ORDER BY writedate DESC
+		LIMIT ${startIdx}, ${pageRow}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewcount" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		UPDATE pboard
+		SET viewcount = viewcount + 1
+		WHERE board_name = #{board_name} AND board_no = #{board_no}
+	</update>
+
+	<!-- view  -->
+	<select id="view" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
+		SELECT *,
+		 (SELECT COUNT(*) FROM plike WHERE board_name = #{board_name} AND board_no = #{board_no}) AS likecount,
+		 (SELECT COUNT(*) FROM pdislike WHERE board_name = #{board_name} AND board_no = #{board_no}) AS dislikecount
+		FROM pboard WHERE board_name = #{board_name} AND board_no = #{board_no} 
+	</select>
+	
+	<!-- view에 보일 코스(지도정보, 글내용) 가지고 오기 -->
+	<select id="getCourse" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.map.MapVO">
+		SELECT bc.content, m.*
+		FROM pboardcourse bc, pmap m 
+		WHERE bc.board_no = m.board_no AND bc.course_no = m.course_no AND bc.board_no = #{board_no}
+	</select>
+	
+	<!-- 여행글쓰기 -->
+	<insert id="boardInsert" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		INSERT INTO pboard (
+			board_name, id, member_no, title, viewcount, writedate, updatedate
+		) VALUES (
+			#{board_name}, #{id}, #{member_no}, #{title}, #{viewcount}, NOW(), NOW()
+		)
+		<selectKey resultType="int" keyProperty="board_no" order ="AFTER"> 
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 여행수정화면 불러오기 -->
+	<select id="updateView" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
+		SELECT board_no, member_no, title
+		FROM pboard
+		WHERE board_no = #{board_no}
+	</select>
+
+	<select id="updateCategory" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.util.CategoryVO">
+		SELECT hashtag_no
+		FROM pcategory
+		WHERE board_no = #{board_no} AND hashtag_no IS NOT NULL
+	</select>
+	
+	<select id="updateCategory2" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.util.CategoryVO">
+		SELECT cat.region_no, cat.board_no, reg.region_name
+		FROM pregion reg, pcategory cat
+		WHERE board_no = #{board_no} AND reg.region_no = cat.region_no
+	</select>
+	
+	<!-- 여행글쓰기 타이들 수정 -->
+	<update id="boardUpdate" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		UPDATE pboard 
+		SET 
+			title = #{title}
+			, updatedate = NOW()
+		WHERE board_no = #{board_no} AND board_name = "여행게시판";
+	</update>
+	
+	<!-- 여행코스 등록 -->
+	<insert id="boardCourseInsert" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		INSERT INTO pboardcourse (
+			board_name, board_no, content, course_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{content}, #{course_no}
+		)
+	</insert>
+
+	<!-- 여행코스 수정(삭제 후 다시등록) -->
+	<delete id="boardCourseDel" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		DELETE FROM pboardcourse WHERE board_name = #{board_name} AND board_no = #{board_no};
+	</delete>
+
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="a.b.c.dataro.boardTravel.BoardVO">
+		DELETE FROM pboard WHERE board_name = #{board_name} AND board_no = #{board_no}
+	</delete>
+	
+	<!-- 내가 쓴 글(마이페이지) -->
+	<select id="myList1" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
+		SELECT * FROM pboard
+		WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+		ORDER BY writedate DESC
+		LIMIT ${startIdx}, ${pageRow}
+	</select>
+	<select id="count1" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM pboard 
+		WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+	</select>
+	
+	 <!-- 내가 쓴 댓글(마이페이지) -->
+ 	<select id="myList2" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
+		SELECT rep.member_no, rep.board_no, b.title, rep.board_name, rep.content, rep.reply_writedate 
+		FROM preply rep JOIN pboard b 
+		ON rep.board_no = b.board_no
+		WHERE rep.member_no = #{member_no} AND rep.content LIKE '%${sword}%'
+		ORDER BY reply_writedate DESC
+		LIMIT ${startIdx}, ${pageRow}
+	</select>
+	<select id="count2" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM preply rep JOIN pboard b 
+		ON rep.board_no = b.board_no
+		WHERE rep.member_no = #{member_no} AND rep.content LIKE '%${sword}%'
+	</select> 
+	
+	<!-- 내가 좋아요 누른 게시물(마이페이지) -->
+	<select id="myList3" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
+		SELECT l.board_name, l.board_no, b.title, b.viewcount
+		FROM plike l JOIN pboard b 
+		ON l.board_name = b.board_name AND l.board_no = b.board_no 
+		WHERE l.member_no = #{member_no} AND title LIKE '%${sword}%'
+		ORDER BY viewcount DESC 
+		LIMIT  ${startIdx}, ${pageRow}
+	</select>
+	
+	<select id="count3" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM plike l JOIN pboard b 
+		ON l.board_name = b.board_name AND l.board_no = b.board_no 
+		WHERE l.member_no = #{member_no} AND title like '%${sword}%'
+	</select> 
+	
+	<!-- 내가 참여한 채팅방(마이페이지) -->
+	<select id="myList6" parameterType="a.b.c.dataro.room.RoomVO" resultType="a.b.c.dataro.room.RoomVO">
+		SELECT r.board_name, r.room_no, r.room_title, r.roommaker_id, r.room_startdate
+		FROM proom r, proommember rm
+		WHERE r.room_no = rm.room_no AND rm.room_participant_no = #{room_participant_no}
+	</select>
+	
+</mapper>

@@ -1,0 +1,83 @@
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #181818;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.color1 {
+  background-color: #f5f8ff;
+}
+.color2 {
+  background-color: #a9c7d8;
+}
+.color3 {
+  background-color: #c0df9f;
+}
+.color4 {
+  background-color: #f2e5a6;
+}
+.color5 {
+  background-color: #e89d9d;
+}
+
+.container {
+    display: grid;
+    padding: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(300px, auto);
+    /* grid-row-gap: 158px; */
+    grid-column-gap: 40px;
+}
+
+.cnt_set {
+    display: grid;
+    grid-template-rows: 117px 330px 100px;
+    align-items: center;
+}
+
+.courselist{
+	padding-left: 50px;
+	display: table;
+}
+.img_area ul{
+	background-color:#f5f8ff; 
+	border:0.2px solid #e1e1e13b; 
+	border-radius:10px; 
+	margin:5px; 
+	padding:4px 10px;
+}
+.maplist{
+	text-align: left; 
+	line-height: 1.3;
+	display: table-cell;
+}
+
+.sub_header .content #frm input[type='text']{
+	height: 40px;
+    box-sizing: border-box;
+    padding: 5px 30px 5px 5px;
+    border: 0;
+    width: 150%;
+    line-height: 40px;
+    background-color: #fff;
+    vertical-align: middle;
+}
+
+.hashtag{display:inline-block;border:1px solid #f6f6f6;padding:10px 12px 10px 0px;border-radius:50px;margin:0 6px 14px;cursor: pointer;background:#f6f6f6}
+.region{width: 100%;border-top: 2px solid #a9c7d8;padding:20px 0;}
+.region #region{padding:10px;font-size:21px;font-weight:bold;float:left;border:none;cursor:pointer}
+.region #region option{cursor:pointer}
+.region .region_result{float:right;text-align:left;margin-top:10px}
+.region .region_result li{display:inline-block;font-size:19px;margin:0 10px}
+.region .region_result li .fa-circle-xmark{color:#00939b;margin-left:5px;cursor:pointer}
+.region .region_detail{display: flex;flex-wrap: wrap;padding:20px 0;width:100%;}
+.region .region_detail input[type="checkbox"]{opacity: 0;position:absolute;top:0;left:0}
+.region .region_detail label{position:relative;cursor:pointer;display:inline-block;border-right:1px solid #cbdbdc;border-bottom:1px solid #cbdbdc;width:136px;padding:15px 0;font-family:GmarketSansMedium;background:#f6f6f6}
+.region .region_detail label:nth-child(-n+10){border-top:1px solid #cbdbdc}
+.region .region_detail label:first-child{border-left:1px solid #cbdbdc}
+.region .region_detail label:nth-child(10n+1){border-left:1px solid #cbdbdc}
+.region .region_detail label.on{background:#00939b;color:#fff}

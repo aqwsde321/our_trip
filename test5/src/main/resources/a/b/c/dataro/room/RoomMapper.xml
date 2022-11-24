@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.room.RoomMapper">
+
+	<!--채팅하기 -->
+	<insert id="chat" parameterType="a.b.c.dataro.room.ChatVO">
+		INSERT INTO pchat (
+			board_name, board_no, room_no, member_id, member_no, content, chat_writedate
+		) VALUES (
+			#{board_name}, #{board_no}, #{room_no}, #{member_id},#{member_no}, #{content}, NOW()
+		)
+	</insert>
+
+	<!--채팅 목록 -->
+	<select id="chatListCount" parameterType="a.b.c.dataro.room.ChatVO" resultType="int">
+		SELECT count(chat_no) FROM pchat WHERE room_no = #{room_no}
+	</select>	
+	<!--채팅 목록 -->
+	<select id="chatList" parameterType="a.b.c.dataro.room.ChatVO" resultType="a.b.c.dataro.room.ChatVO">
+		SELECT * FROM pchat WHERE room_no = #{room_no} ORDER BY chat_no
+	</select>
+	
+	<!-- 방상세보기 -->
+	<select id="view" parameterType="int" resultType="a.b.c.dataro.room.RoomVO">
+		SELECT * FROM proom WHERE room_no =${room_no}
+	</select>
+
+	<!-- 정현 -->
+	<insert id="makeRoom" parameterType="a.b.c.dataro.room.RoomVO">
+		INSERT INTO proom (
+			board_name, board_no, roommaker_id, room_title, room_content, room_startdate, room_enddate, room_makedate
+			<if test="room_pwd != null and room_pwd != ''">
+			, room_pwd
+			</if>
+		) VALUES (
+			#{board_name}, #{board_no}, #{roommaker_id}, #{room_title}, #{room_content}, #{room_startdate}, #{room_enddate}, now()
+			<if test="room_pwd != null and room_pwd != ''">
+			, md5(#{room_pwd})
+			</if>
+		)
+		<selectKey keyProperty="room_no" resultType="int" order="AFTER">
+		 SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 게시글에 해당하는 방 리스트  -->
+	<select id="roomList" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.room.RoomVO">
+		SELECT a.*, b.room_participant_no 
+		FROM (
+			SELECT proom.board_name, proom.board_no, roommaker_id, room_title, room_content, proom.room_startdate, proom.room_enddate, proom.room_pwd, count.room_no, room_participant_count 
+			FROM proom, 
+			(SELECT COUNT(*) room_participant_count, room_no FROM proommember GROUP BY room_no) count 
+			WHERE proom.room_no = count.room_no AND proom.board_name = #{board_name} AND proom.board_no = #{board_no}
+			) a 
+		LEFT OUTER JOIN (
+			SELECT * FROM proommember WHERE room_participant_no = #{login_member_no}
+			) b 
+		ON a.room_no =  b.room_no	
+	</select>
+	
+	<!-- 비밀방 pwd 체크 -->
+	<select id="pwdCheck" parameterType="a.b.c.dataro.room.RoomVO" resultType="int">
+		SELECT COUNT(*) FROM proom
+		WHERE board_name = #{board_name} AND board_no = #{board_no} AND room_no = #{room_no} AND room_pwd = md5(#{room_pwd})
+	</select>
+	
+	<!-- 방에 입장 -->
+	<insert id="enterRoom" parameterType="a.b.c.dataro.room.RoomVO" >
+		INSERT INTO proommember (
+			room_no, room_participant_no
+		) VALUES (
+			#{room_no}, #{room_participant_no}
+		)
+	</insert>	
+	
+	<!-- 내가 참여한 방인지 확인, 참여했다면 count가 1이 나올 것 -->
+	<select id="checkRoom" parameterType="a.b.c.dataro.room.RoomVO" resultType="int">
+		SELECT COUNT(*) FROM proommember WHERE room_no = #{room_no} AND room_participant_no = #{room_participant_no}
+	</select>
+
+</mapper>

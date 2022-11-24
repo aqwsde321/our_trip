@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.boardFree.FreeMapper">
+
+	<select id="list" resultType="a.b.c.dataro.boardFree.FreeVO"> 
+		SELECT
+			* 
+	 		, (SELECT COUNT(*) FROM plike WHERE plike.board_name = '자유게시판' AND pfreeboard.board_no = plike.board_no) AS likecount 
+	 		, (SELECT COUNT(*) FROM pdislike WHERE pdislike.board_name = '자유게시판' AND pfreeboard.board_no = pdislike.board_no) AS dislikecount  
+			, (SELECT COUNT(*) FROM preply WHERE preply.board_name = '자유게시판' AND pfreeboard.board_no = preply.board_no) AS replycount 
+		FROM pfreeboard
+		<where>
+			<if test= "stype != null or sword != null"> 
+				<if test= "stype == 'title'">
+					title LIKE '%${sword}%'
+				</if>
+				<if test= "stype == 'id'">
+					id LIKE '%${sword}%'
+				</if>
+			</if>
+		</where>	
+		ORDER BY writedate DESC
+		LIMIT  ${startIdx}, ${pageRow}
+	</select>
+	
+	<select id="count" parameterType="a.b.c.dataro.boardFree.FreeVO" resultType="int">
+		SELECT COUNT(*) FROM pfreeboard
+		<where>
+			<if test="stype != null and stype != ''">
+				<if test="stype == 'title'">
+					title LIKE '%${sword}%'
+				</if>
+				<if test="stype == 'id'">
+					id LIKE '%${sword}%'
+				</if> 
+			</if>
+		</where>
+	</select>	
+	
+	<!-- 글 작성 -->
+	<insert id="insert" parameterType="a.b.c.dataro.boardFree.FreeVO">
+		INSERT INTO pfreeboard (
+			board_name, id, member_no, title, content, viewcount, writedate, filename_org, filename_server
+		) VALUES (
+			#{board_name}, #{id}, #{member_no}, #{title}, #{content}, 0, NOW(), #{filename_org}, #{filename_server}
+		)
+		<selectKey keyProperty="board_no" resultType="int"  order ="AFTER"> 
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 상세페이지 -->
+	<select id="freeView" parameterType="int" resultType="a.b.c.dataro.boardFree.FreeVO">
+		SELECT *
+		FROM pfreeboard
+		WHERE board_no = #{board_no}
+	</select>
+
+	<!-- 글 수정 -->
+	<update id="update" parameterType="a.b.c.dataro.boardFree.FreeVO">
+		UPDATE pfreeboard 
+		SET 
+			title = #{title}
+			, content = #{content}
+			, updatedate = NOW()
+		WHERE board_no = #{board_no}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewcount" parameterType="int">
+		UPDATE pfreeboard
+		SET viewcount = viewcount + 1
+		WHERE board_no = #{board_no}
+	</update>
+		
+	<!-- 게시글 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM pfreeboard WHERE board_no = #{board_no}
+	</delete>
+	
+	<!-- 댓글 좋아요 버튼 누르기 -->
+	<insert id="clickReplyLike" parameterType="a.b.c.dataro.boardFree.FreeVO">
+		INSERT INTO plike (
+			board_name, board_no, reply_no, member_no
+		) VALUES (
+			#{board_name}, #{board_no}, #{reply_no}, #{member_no}
+		)
+	</insert>
+
+</mapper>

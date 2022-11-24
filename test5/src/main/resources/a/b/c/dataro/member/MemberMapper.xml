@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.member.MemberMapper">
+
+	<!-- 회원등록 -->
+	<insert id="insert" parameterType="a.b.c.dataro.member.MemberVO">
+		INSERT INTO pmember (
+			id, nickname, pwd, email, m_filename_org, m_filename_server, regdate
+		) VALUES (
+			#{id}, #{nickname}, md5(#{pwd}), #{email}, #{m_filename_org}, #{m_filename_server}, NOW()
+		)
+	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="checkId" resultType="int" parameterType="a.b.c.dataro.member.MemberVO">
+		SELECT COUNT(*) FROM pmember WHERE id = #{id}
+	</select>
+	
+	<!-- 이메일 중복체크 -->
+	<select id="checkEmail" resultType="int" parameterType="a.b.c.dataro.member.MemberVO">
+		SELECT COUNT(*) FROM pmember WHERE email = #{email}
+	</select>
+	
+	<!-- 로그인 할 때, 아이디 패스워드 확인용 -->
+	<select id="checkIdPw" resultType="a.b.c.dataro.member.MemberVO" parameterType="a.b.c.dataro.member.MemberVO">
+		SELECT * FROM pmember WHERE id = #{id} AND pwd = md5(#{pwd})
+	</select>
+	
+	<!-- 아이디로 해당하는 개인정보 가져오기 -->
+	<select id="myInfo" resultType="a.b.c.dataro.member.MemberVO">
+		SELECT * FROM pmember WHERE id = #{id}
+	</select>
+	
+	<!-- 회원번호로 해당하는 개인정보 가져오기 -->
+	<select id="myInfo2" resultType="a.b.c.dataro.member.MemberVO">
+		SELECT * FROM pmember WHERE member_no = #{member_no}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="editUserInfo" parameterType="a.b.c.dataro.member.MemberVO">
+		UPDATE pmember 
+		SET
+			nickname = #{nickname}
+			, pwd = md5(#{pwd})
+			, email = #{email}
+			<if test="m_filename_org != null">
+			, m_filename_org = #{m_filename_org}
+			, m_filename_server = #{m_filename_server}
+			</if>
+		WHERE id = #{id}
+	</update> 
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="a.b.c.dataro.member.MemberVO" resultType="a.b.c.dataro.member.MemberVO">
+		SELECT * FROM pmember WHERE email = #{email}
+	</select>
+	
+	<!-- 비밀번호찾기화면에서 입력한 아이디와 이메일이 디비에 저장되어 있나 확인 -->
+	<select id="findPwd" parameterType="a.b.c.dataro.member.MemberVO" resultType="a.b.c.dataro.member.MemberVO">
+		SELECT * FROM pmember WHERE id = #{id} AND email = #{email}
+	</select> 
+	
+	<!-- 조건에 맞으면(사실 조건은 필요없음) 비밀번호 업데이트 -->
+	<update id="updateTempPwd" parameterType="a.b.c.dataro.member.MemberVO">
+		UPDATE pmember SET pwd = md5(#{pwd}) WHERE id = #{id} AND email = #{email}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteId" parameterType="a.b.c.dataro.member.MemberVO">
+		DELETE FROM pmember WHERE id = #{id} AND pwd = md5(#{pwd})
+	</delete>
+
+</mapper>

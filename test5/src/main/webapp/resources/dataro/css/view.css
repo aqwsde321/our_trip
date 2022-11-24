@@ -1,0 +1,210 @@
+/*common*/
+#wrap{text-align: center;}
+#wrap .content{display: inline-block;width:1360px;}
+ .content{width: 1020px; margin:0 auto;}
+ .view .title{margin:0 auto; display:inline-block; line-height: 80px;}
+ .view .user{display: inline-block; float:left;}
+ .view .user .user_img img{display: inline-block;border:1px solid black;width: 50px;height: 50px;border-radius: 50px;}
+ .view .user span{vertical-align: middle;}
+ .view #count{float: right; display:inline-block; padding-top: 35px;}
+ .view .category{margin:10px 0;}
+ .view .course{ margin:10px 0;display:inline-block;width:100%}
+ .view #mapRoom{ height:500px;}
+ .view .reply{margin:10px 0;}
+.edit_btn{display:inline-block;padding:0 35px;height:56px;line-height: 54px;border-radius: 56px;border:1px solid #000;margin:10px 0 10px}
+.edit_btn i{margin-left:7px}
+ table, td, th {
+  border : none;
+  text-align:center;
+  vertical-align:top;
+};
+
+* {
+box-sizing:border-box;
+}
+
+body {
+font-size:18px;
+
+line-height:1.5em;
+}
+
+a {
+text-decoration:none;
+}
+
+.btnSet {position:relative; margin:20px 0; text-align:center; overflow:hidden;}
+.btn {font-size:14px; text-decoration:none !important; white-space:nowrap; display:inline-block; vertical-align:baseline; position:relative; cursor:pointer; padding:4px 20px; min-width:64px; border:2px solid #6e8cc399; color:#fff !important; margin:0 2px; text-align:center; font-weight:bold; border-radius:50px; background-color:#6e8cc399;}
+.btnSet .btn:hover{border:2px solid #6e8cc3cc; background:#6e8cc3cc; color:#fff !important;  text-decoration:none !important;}
+
+/*img modal*/
+.imgmodal {
+	display: none;
+	z-index: 500;
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.imgmodal button {
+	position: absolute;
+	top: 3rem;
+	right: 3rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	font-size: 3rem;
+}
+
+.modalBox {
+	position: relative;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	background-color: #ffffff;
+	width: 550px;
+	height: 550px;
+	text-align: center;
+}
+
+.modalBox img {
+	width: 100%;
+}
+
+.modalBox p {
+	color: #ffffff;
+	background-color: #000;
+	font-size: 2rem;
+	padding: .2rem;
+}
+/*img*/
+
+.commentmodal,.msgmodal,.roommodal,.roompwdmodal {
+	position:fixed;
+	background-color:rgba(0,0,0,0.4);
+	top:0;
+	left:0;
+	height:100vh;
+	width:100%;
+	display:none;
+	z-index: 5;
+}
+
+.modal-commentcontent,.modal-msgcontent,.modal-roomcontent,.modal-roompwdcontent{
+	background-color:#fff;
+	width:350px;
+	border-radius:10px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	padding:30px;
+	box-shadow:0 0 15px rgba(0,0,0,0.15);
+	text-align:center;
+}
+
+.btn-close,.btn-msgclose,.btn-roomclose,.btn-roompwdclose {
+	position : absolute;
+	top:15px;
+	right:15px;
+}
+
+.btn-edit,.btn-send,.btn-make {
+	background-color:#ffccc1;
+	color:#fff;
+	border-radius:5px;
+	font-size:14px;
+	padding:7px;
+	display:block;
+}
+.btn-edit:hover ,.btn-send:hover,.btn-make:hover {
+	background-color:#f9c0b3;
+}
+
+.mkroom {
+  position: sticky;
+  top: 0; /* 클래스 sticky인 요소 안에서 top값이 0이되면 sticky를 적용 */
+  background-color:#d8a9a969;
+	color:rgb(0, 0, 0);
+	border-radius:5px;
+	border:0;
+	outline:0;
+	padding:7px;
+	text-align : center;
+}
+.mkroom:hover {
+	background-color:#d8a9a9a8;
+}
+
+#section {
+   width:700px;
+   height:500px;
+   text-align:left;
+   float:left;
+   padding:10px;
+   background-color:#f3f3f3ee;
+   font-size:14px;
+}
+#section .tt{
+	width:680px;
+	height:430px;
+	overflow-y: scroll;
+}
+#footer {
+   background-color:#f6f6f687;
+	/* clear:both; */
+   font-size:14px;
+   display:inline-block;
+}
+
+.view .category .hash{
+	display: inline-block;
+    border:rgb(0, 0, 0) solid #f6f6f6;
+    padding: 10px 10px 10px 10px;
+    border-radius: 50px;
+    margin: 0 6px 14px;
+    font-size:15px;
+    background: #d8a9a930;
+    color: black;
+    font-weight:bold;
+}
+ 
+ 
+/* 지도 마커라인 긋기 */
+.dot {overflow:hidden;float:left;width:12px;height:12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+.dotOverlay {position:relative;bottom:-45px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#ffffffb8;}
+.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+.number {font-weight:bold;color:#ee6152;}
+.dotOverlay:after {content:'';position:absolute;transform: rotate(180deg);margin-left:-6px;left:50%;bottom:36px;width:11px;height:8px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+.distanceInfo .label {display:inline-block;width:50px;}
+.distanceInfo:after {content:none;}
+
+/* 코스 가로 스크롤*/
+.view .course .write_detail{background:#f6f6f6;width:100%;padding:20px;overflow-x: scroll; }
+.write_detail .scroll{width:2080px;display:inline-block;}
+.write_detail .set{padding:20px;background:#fff;width:400px;float:left;margin-right:15px}
+.write_detail .set textarea{resize:none}
+.write_detail .set h5{font-size:22px;font-family:'GmarketSansMedium','sans serif';margin:10px 0 21px}
+.write_detail .set .map_list{margin-bottom:8px}
+.write_detail .set .info{display:inline-block;width:90%;text-align:left}
+.write_detail .set .info span{display:block;margin-bottom:11px;height:36px}
+.write_detail .set .info span.tel{height:auto}
+.write_detail .set .info span i{margin-right:7px;color:#0066ff;margin-left:-19px}
+.write_detail .set .course_delete{display:inline-block;border:1px solid #000;height: 33px;line-height: 31px;padding: 0 20px;font-size: 16px;border-radius:50px;cursor: pointer}
+.write_detail .set .course_delete:hover{background:#00939b;color:#fff;border-color:#00939b}
+.write_detail #courseList{float:initial;overflow:hidden}
+.write_detail #courseList li{display:inline-block;float:left;width:400px;background:#fff;padding:15px;margin-right:15px;height:80px}
+.write_detail .seracLocation{display:inline-block;width:100%;border:1px solid #000;}
+.write_detail .seracLocation input{border:none;display:inline-block;width:80%;float:left}
+.write_detail .seracLocation button{border:none;display:inline-block;width:20%;float:right}
+.write_detail .set textarea{width:100%;height:200px}
+.write_detail .set .pic_wrap{display:inline-block;width:100%;height:100px;margin:20px 0}
+.write_detail .set .pic_wrap .pic{width:100px;float:left;height:100%;background:yellow;margin-right:10px;position:relative;}
+.write_detail .set .pic_wrap .pic input{position:absolute;width:100%;height:100%;top:0;left:0;opacity:0;cursor:pointer;z-index:2}
+.write_detail .set .pic_wrap .pic img{width:100%; height: 100%;}
+.write_detail .set .pic_wrap .pic .delete{position:absolute;display:inline-block;top:0;right:0;z-index:5;width:auto;transform: translate(50%,-50%);cursor:pointer}
+.write_detail .set .pic_wrap .plus{float:left;line-height:100px}

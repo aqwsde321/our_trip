@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.dataro.message.MessageMapper"> <!-- xml이 있는 위치랑 정확히 일치해야함 -->
+
+	<insert id="insert" parameterType="a.b.c.dataro.message.MessageVO">
+		INSERT INTO pmessage (
+			send_member_no, receive_member_no, message_content, senddate
+		) VALUES (
+			#{send_member_no}, #{receive_member_no}, #{message_content}, now()
+		)
+	</insert>
+
+	<!-- 받은 쪽지함에서 쪽지 삭제 -->
+	<update id="delReceiveMsg" parameterType="int">
+		UPDATE pmessage
+		SET show_receive = 0
+		WHERE message_no = #{message_no}
+	</update>
+	 
+	<!-- 보낸 쪽지함에서 쪽지 삭제 -->
+	<update id="delSendMsg" parameterType="int">
+		UPDATE pmessage
+		SET show_send = 0
+		WHERE message_no = #{message_no}
+	</update>
+	
+	<!-- 쪽지 읽음처리 -->
+	<update id="readMsg" parameterType="int">
+		UPDATE pmessage 
+		SET readdate = now() 
+		WHERE message_no = #{message_no}
+	</update>
+	
+	<!-- 읽지 않은 쪽지갯수 -->
+	<select id="unreadMsgCount" parameterType="a.b.c.dataro.message.MessageVO" resultType="int">
+		SELECT COUNT(*) FROM pmessage WHERE receive_member_no = #{receive_member_no} AND readdate IS NULL AND show_receive = 1
+	</select>
+	
+	<!-- 전체 쪽지갯수 -->
+	<select id="msgTotalCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM pmessage WHERE receive_member_no = #{receive_member_no}
+	</select>
+	
+	<!-- 읽지 않은 쪽지내용 -->
+	<select id="unreadMsgList" parameterType="a.b.c.dataro.message.MessageVO" resultType="a.b.c.dataro.message.MessageVO">
+		SELECT 
+    		m.nickname
+    		, m.id
+    		, msg.message_no
+    		, msg.message_content
+    		, msg.send_member_no
+		FROM pmessage msg JOIN pmember m  
+		ON m.member_no = msg.send_member_no 
+		WHERE receive_member_no = #{receive_member_no} AND readdate IS NULL AND show_receive = 1
+		ORDER BY senddate DESC;
+	</select>
+	
+	<!-- 내가 받은 쪽지(마이페이지) -->
+	<select id="myList4" parameterType="a.b.c.dataro.message.MessageVO" resultType="a.b.c.dataro.message.MessageVO">
+		SELECT 
+			mem.nickname
+			, mem.id
+			, msg.message_content
+			, msg.senddate
+			, msg.readdate
+			, msg.message_no
+			, msg.send_member_no
+			, msg.receive_member_no
+		FROM pmessage msg JOIN pmember mem  
+		ON mem.member_no = msg.send_member_no 
+		WHERE receive_member_no = #{receive_member_no} AND show_receive = 1
+		<if test="stype != null and stype != ''">
+			<if test="stype != 'all'">
+				AND ${stype} LIKE '%${sword}%'
+			</if>
+			<if test="stype == 'all'">
+	    		AND (mem.nickname LIKE '%${sword}%' OR msg.message_content LIKE '%${sword}%')
+	    	</if>
+		</if> 
+		ORDER BY msg.senddate DESC 
+		LIMIT ${startIdx}, ${pageRow}
+	</select>
+	
+	<select id="count4" parameterType="a.b.c.dataro.message.MessageVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM pmessage msg JOIN pmember mem
+		ON mem.member_no = msg.send_member_no
+		WHERE receive_member_no = #{receive_member_no} AND show_receive = 1
+		<if test="stype != null and stype != ''">
+			<if test="stype != 'all'">
+				AND ${stype} LIKE '%${sword}%'
+			</if>
+			<if test="stype == 'all'">
+	    		AND (mem.nickname LIKE '%${sword}%' OR msg.message_content LIKE '%${sword}%')
+	    	</if>
+		</if>
+	</select>
+	
+	<!-- 내가 보낸 쪽지(마이페이지) -->
+	<select id="myList5" parameterType="a.b.c.dataro.message.MessageVO" resultType="a.b.c.dataro.message.MessageVO">
+		SELECT 
+			mem.nickname
+			, mem.id
+			, msg.message_content
+			, msg.senddate
+			, msg.message_no
+		FROM pmessage msg JOIN pmember mem  
+		ON mem.member_no = msg.receive_member_no 
+		WHERE send_member_no = #{send_member_no} AND show_send = 1
+		<if test="stype != null and stype != ''">
+			<if test="stype != 'all'">
+				AND ${stype} LIKE '%${sword}%'
+			</if>
+			<if test="stype == 'all'">
+	    		AND (mem.nickname LIKE '%${sword}%' OR msg.message_content LIKE '%${sword}%')
+	    	</if>
+		</if> 
+		ORDER BY msg.senddate DESC 
+		LIMIT ${startIdx}, ${pageRow}
+	</select>
+	
+	<select id="count5" parameterType="a.b.c.dataro.message.MessageVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM pmessage msg JOIN pmember mem
+		ON mem.member_no = msg.receive_member_no 
+		WHERE send_member_no = #{send_member_no} AND show_send = 1
+		<if test="stype != null and stype != ''">
+			<if test="stype != 'all'">
+				AND ${stype} LIKE '%${sword}%'
+			</if>
+			<if test="stype == 'all'">
+	    		AND (mem.nickname LIKE '%${sword}%' OR msg.message_content LIKE '%${sword}%')
+	    	</if>
+		</if> 
+	</select> 
+	
+</mapper>
+
