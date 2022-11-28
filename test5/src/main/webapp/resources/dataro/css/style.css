@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*common--내용보이는 부분 넓이값과 폰트 지정*/
 #wrap{text-align: center;}
-#wrap .content{display: inline-block;max-width:1360px;}
+#wrap .content{display: inline-block;width:1360px;}
 #wrap .chat{min-width: 800px; }
 @font-face {
     font-family: 'GmarketSansMedium';

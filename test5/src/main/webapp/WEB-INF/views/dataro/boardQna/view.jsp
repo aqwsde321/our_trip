@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/contents.css"/>
@@ -31,7 +31,7 @@
 						<dl>
 							<dt>${data.title } </dt>
 							<dd class="date" style="text-align:left;">
-							작성자 ${data.id } <br>
+							작성자 <a class="btn-sendclick" href="javascript:message(${data.member_no }, '${data.id }')">${data.id }</a> <br>
 							작성일  <fmt:formatDate value="${data.writedate }" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 							<c:if test="${!empty data.updatedate }">
 							수정일  <fmt:formatDate value="${data.updatedate }" pattern="yyyy-MM-dd HH:mm:ss"/>

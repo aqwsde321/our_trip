@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/login.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -38,6 +37,10 @@
 	</div>
 </div>
 <script>
+$(function(){
+	$('#4').click();
+})
+
 function logout(){
 	if(confirm('로그아웃 하시겠습니까?')) {
 		location.href = "/dataro/member/logout";

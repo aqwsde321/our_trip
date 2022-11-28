@@ -106,14 +106,21 @@
 	
 	<!-- 내가 쓴 글(마이페이지) -->
 	<select id="myList1" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="a.b.c.dataro.boardTravel.BoardVO">
-		SELECT * FROM pboard
-		WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+		SELECT title, board_name, board_no, viewcount, writedate FROM pboard WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+			UNION 
+		SELECT title, board_name, board_no, viewcount, writedate FROM pfreeboard WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+			UNION 
+		SELECT title, board_name, board_no, viewcount, writedate FROM pqnaboard WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
 		ORDER BY writedate DESC
 		LIMIT ${startIdx}, ${pageRow}
 	</select>
 	<select id="count1" parameterType="a.b.c.dataro.boardTravel.BoardVO" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM pboard 
-		WHERE member_no = #{member_no} AND title LIKE '%${sword}%'
+		SELECT COUNT(*) FROM 
+		(
+			SELECT title, board_name, board_no, viewcount, writedate from pboard where member_no = #{member_no} AND title LIKE '%${sword}%' UNION
+			SELECT title, board_name, board_no, viewcount, writedate from pfreeboard where member_no = #{member_no} AND title LIKE '%${sword}%' UNION
+			SELECT title, board_name, board_no, viewcount, writedate from pqnaboard where member_no = #{member_no} AND title LIKE '%${sword}%'
+		) a 
 	</select>
 	
 	 <!-- 내가 쓴 댓글(마이페이지) -->

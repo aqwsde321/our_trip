@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>DATARO</title>
+<title>OurTrip</title>
 </head>
 <body>
 <div id="wrap">
@@ -55,7 +55,7 @@
 						<c:if test="${not empty data.list }"><!-- 쓸 필요X, for문이라 없으면 안돔 -->
 							<c:forEach items="${data.list }" var="list" varStatus="idx" >      
 							<tr>
-								<td>${data.totalCount- idx.index - ((FreeVO.page-1) * FreeVO.pageRow)}</td>
+								<td>${data.totalCount- idx.index - ((freeVO.page-1) * freeVO.pageRow)}</td>
 								<td class="txt_l" style="text-align:left;">
 									<a href="view.do?board_no=${list.board_no }">${list.title }<c:if test="${list.replycount>0 }"> [${list.replycount }]</c:if><c:if test="${!empty list.filename_server }">&nbsp;&nbsp;<i class="fa-sharp fa-solid fa-image"></i></c:if></a>
 								</td>

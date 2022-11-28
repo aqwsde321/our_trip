@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>DATARO</title>
+<title>OurTrip</title>
 </head>
 <body>
 <div id="wrap">
@@ -27,7 +27,7 @@
 			<h3 class="sub sub_title">QnA</h3>
 			
 			<div class="bbs">
-				<span><strong>총 ${data.totalCount }개</strong>  |  ${freeVO.page }/${data.totalPage }페이지</span>
+				<span><strong>총 ${data.totalCount }개</strong>  |  ${qnaVO.page }/${data.totalPage }페이지</span>
 				<table class="list">
 					<colgroup>
 					<col width="80px" />
@@ -55,11 +55,22 @@
 						<c:if test="${not empty data.list }"><!-- 쓸 필요X, for문이라 없으면 안돔 -->
 							<c:forEach items="${data.list }" var="list" varStatus="idx" >      
 							<tr>
-								<td>${data.totalCount- idx.index - ((FreeVO.page-1) * FreeVO.pageRow)}</td>
+								<td>${data.totalCount- idx.index - ((qnaVO.page-1) * qnaVO.pageRow)}</td>
 								<td class="txt_l" style="text-align:left;">
 									<c:forEach begin="1" end="${list.nested }">&nbsp;&nbsp;&nbsp;</c:forEach>
 									<c:if test="${list.nested>0 }"><img src="/resources/dataro/img/answer_icon.gif"></c:if>
-									<a href="view.do?board_no=${list.board_no }">${list.title }<c:if test="${list.replycount>0 }"> [${list.replycount }]</c:if><c:if test="${!empty list.filename_server }">&nbsp;&nbsp;<i class="fa-sharp fa-solid fa-image"></i></c:if></a>
+									<c:choose>
+										<c:when test="${list.board_no >=0 }">
+											<a href="view.do?board_no=${list.board_no }">
+												${list.title }
+												<c:if test="${list.replycount>0 }"> [${list.replycount }]</c:if>
+												<c:if test="${!empty list.filename_server }">&nbsp;&nbsp;<i class="fa-sharp fa-solid fa-image"></i></c:if>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<f style="text-decoration: line-through;">${list.title }</f>
+										</c:otherwise>								
+									</c:choose>
 								</td>
 								<td>${list.viewcount }</td>
 								<td class="writer">${list.id }</td>

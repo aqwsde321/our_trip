@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/login.css"/>

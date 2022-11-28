@@ -28,13 +28,14 @@ public class BoardVO {
 	private int page;
 	private Timestamp reply_writedate; 
 	
-	public BoardVO (String board_name, int page, int pageRow){
+	public BoardVO (String board_name, int page, int pageRow, String filename_server){
 		this.board_name=board_name;
 		this.page=page;
 		this.pageRow=pageRow;
+		this.filename_server= filename_server;
 	}
 	public BoardVO (){
-		this("여행게시판",1,10);
+		this("여행게시판",1,10, "no-image.jpg");
 	}
 	
 	private String content; 

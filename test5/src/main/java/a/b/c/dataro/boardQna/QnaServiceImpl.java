@@ -63,7 +63,11 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public boolean delete(int no) {
-		return qMapper.delete(no) > 0 ? true:false;
+		if(qMapper.gnoCount(no) > 1) {
+			return qMapper.qnaDelete(no) > 0 ? true:false;
+		} else {
+			return qMapper.delete(no) > 0 ? true:false;
+		}
 	}
 
 	@Override

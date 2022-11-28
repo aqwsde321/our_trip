@@ -6,7 +6,7 @@
 <p class="gmarket">
 	<span>
 		<strong>
-			<img src="/resources/dataro/img/reply.png">댓글(${reply.totalCount })
+			<img src="/resources/dataro/img/reply.png"> 댓글 (${reply.totalCount })
 		</strong>
 		| ${replyVO.page}/${reply.totalPage }페이지
 	</span>
@@ -34,7 +34,7 @@
 					<td class="writer">
 						<c:if test="${!empty loginInfo.member_no }">
 							<a class="btn-sendclick" href="javascript:message(${vo.member_no }, '${vo.member_id }')">
-								${vo.member_id }<img src="/resources/dataro/img/message.png" title="쪽지 보내기">
+								${vo.member_id }&nbsp;<img src="/resources/dataro/img/message.png" title="쪽지 보내기">
 							</a>
 						</c:if>
 						<c:if test="${empty loginInfo.member_no }">
@@ -52,7 +52,7 @@
 								</c:if>
 							</a>
 						</c:if>
-						<div class="messageBox" style="display:none; background-color:#eddef2ee; border-radius: 25px; box-shadow: #dadada 1px 1px 0px 0px; text-align:center; ">
+						<div class="messageBox" style="display:none; background-color:#ddddddb5; border-radius: 25px; box-shadow: #ddddddb5 1px 1px 0px 0px; text-align:center; ">
 							<!-- 답글 입력 폼  -->
 							<div id="replyFrm${vo.gno }">
 								<c:if test="${empty loginInfo.member_no}">
@@ -99,7 +99,7 @@
 			<a href="javascript:getReply(${reply.startPage-1 });"></a>
 		</c:if>
 		<c:forEach var="p" begin="${reply.startPage }" end="${reply.endPage }">
-			<a href="javascript:getReply(${p });" class="${replyVO.page == p? 'current' : '' }">${p }</a>
+			<a href="javascript:getReply(${p });" style="${replyVO.page == p? 'font-weight:bold;' : '' }">${p }</a>
 		</c:forEach>
 		<c:if test="${reply.next==true }">
 			<a href="javascript:getReply(${reply.endPage+1 });">></a>

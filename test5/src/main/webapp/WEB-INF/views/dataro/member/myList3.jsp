@@ -15,7 +15,7 @@
 		<form method="get" name="Form" id="searchForm" action="" onsubmit="return myList();">
 			<div id="srchDiv">
 				<span>
-					<select id="stype" name="stype" value="${param.stype }">
+					<select id="stype" name="stype">
 						<option value="title">글제목</option>
 					</select>
 				</span>

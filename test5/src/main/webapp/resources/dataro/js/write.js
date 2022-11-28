@@ -1,6 +1,11 @@
 /* 등록 관련 [시작] */
 // 등록 클릭시
 function goSave(){
+	
+	if(!$('#title').val()){
+		alert("제목을 입력해주세요.");
+		return false;
+	}
 	if(count == 0){
 		alert("지도에서 코스를 선택해주세요.(1~5개 선택가능)");
 		return false;
@@ -52,7 +57,7 @@ function writebox(index,places){
 				'<span><i class="fa-solid fa-location-dot"></i>' +  places.address_name  + '</span>'
 		html +=	'</span>'   
 		html +='</div>'
-		html +='<textarea placeholder="내용 입력" name="contents">아무내용~' + count + '</textarea>'
+		html +='<textarea placeholder="내용 입력" name="contents"> </textarea>'
 		html +='<div class="pic_wrap">'
 		html +='	<div class="pic">'
 		html +='		<input type="file" class="file_input'+ pic +'" name="filename" id="inputFile'+pic+'" onchange="readInputFile(this)">'
@@ -74,15 +79,36 @@ function writebox(index,places){
 
 //첨부파일에 추가한 사진미리보기
 function readInputFile(input){
-	var className = input.className;
-	if(input.files && input.files[0]){
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$('.'+className+'').prev("input").val("");
-			$('.'+className+'').next('img').attr("src", e.target.result);
+
+	// files 로 해당 파일 정보 얻기.
+	var file = input.files;
+
+	// file[0].name 은 파일명 입니다.
+	// 정규식으로 확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)) {
+		alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+	}
+	
+	// 체크를 통과했다면 종료.
+	else {
+		var className = input.className;
+		
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				$('.'+className+'').prev("input").val("");
+				$('.'+className+'').next('img').attr("src", e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
 		}
-		reader.readAsDataURL(input.files[0]);
+		return;
 	};
+	
+	// 체크에 걸리면 선택된  내용 취소 처리를 해야함.
+	// 파일선택 폼의 내용은 스크립트로 컨트롤 할 수 없습니다.
+	// 그래서 그냥 새로 폼을 새로 써주는 방식으로 초기화 합니다.
+	// 이렇게 하면 간단 !?
+	input.outerHTML = input.outerHTML;
 };
 
 //첨부파일 올린 사진 취소

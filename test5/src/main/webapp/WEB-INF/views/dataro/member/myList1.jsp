@@ -9,14 +9,14 @@
 <title>게시판목록</title>
 </head> 
 <body>
-<div id="wrap">
+<div id="wrap" >
 	<div class="content login border trhov">
 		<div>
 			<h2>내가 쓴 글</h2>
 			<form method="get" name="Form" id="Form" action="" onsubmit="return myList();">
 				<div id="srchDiv">
 				<span class="srchSelect">
-					<select id="stype" name="stype" value="${param.stype }">
+					<select id="stype" name="stype" >
 						<option value="title">글제목</option>
 					</select>
 				</span>
@@ -25,7 +25,7 @@
 				</span>
 				</div>
 			</form>
-			<table class="list mpList">
+			<table class="list mpList" >
 				<colgroup>
 					<col width="100px" />
 					<col width="100px" />
@@ -52,7 +52,17 @@
 						<tr>
 							<td>${vo.board_name}</td>
 							<td>${vo.board_no}</td>
-							<td class="titlee" > <a href="/dataro/boardTravel/view.do?board_no=${vo.board_no}&board_name=${vo.board_name} ">${vo.title}</a></td>
+							<td class="titlee" >
+								<c:if test="${vo.board_name == '여행게시판'}">
+									 <a href="/dataro/boardTravel/view.do?board_no=${vo.board_no}&board_name=${vo.board_name} ">${vo.title}</a>
+								</c:if>
+								<c:if test="${vo.board_name == '자유게시판'}">
+									<a href="/dataro/boardFree/view.do?board_no=${vo.board_no}&board_name=${vo.board_name} ">${vo.title}</a>
+								</c:if>
+								<c:if test="${vo.board_name == '질문게시판'}">
+									<a href="/dataro/boardQna/view.do?board_no=${vo.board_no}&board_name=${vo.board_name} ">${vo.title}</a>
+								</c:if>
+							</td>
 							<td>${vo.viewcount }</td>
 							<td class="date"><fmt:formatDate value="${vo.writedate }" pattern="yyyy-MM-dd"/></td>
 						</tr>

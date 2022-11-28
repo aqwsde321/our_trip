@@ -9,7 +9,7 @@
 <meta name="format-detection" content="telephone=no, address=no, email=no">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/contents.css"/>
@@ -28,7 +28,7 @@
 			
 			<div class="bbs">
 				<form method="post" name="frm" id="frm" action="update.do"> <!-- enctype="multipart/form-data" -->
-					<input type="hidden" name="board_no" value="">
+					<input type="hidden" name="board_no" value="${data.board_no }">
 					<table class="board_write">
 						<tbody>
 							<tr>

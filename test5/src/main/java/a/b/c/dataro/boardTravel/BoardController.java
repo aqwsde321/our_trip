@@ -2,6 +2,9 @@ package a.b.c.dataro.boardTravel;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import a.b.c.dataro.elasticsearch.ElasticMapper;
+import a.b.c.dataro.elasticsearch.ElasticSearch;
 import a.b.c.dataro.member.MemberService;
 import a.b.c.dataro.member.MemberVO;
 import a.b.c.dataro.message.MessageService;

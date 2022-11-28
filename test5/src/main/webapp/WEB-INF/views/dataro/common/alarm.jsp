@@ -28,7 +28,7 @@
 	cursor: pointer;
 }
 </style>
-<div style="display:inline-block; height:200px; overflow-y:scroll;">
+<div style="display:inline-block; height:200px; width: 740px;overflow-y:scroll;">
 <form id="messageFrm">
 	<table id="alarmtable">
 		<colgroup>
@@ -49,7 +49,11 @@
 				<c:forEach var="vo" items="${unreadList }" >
 					<tr>
 						<td>${vo.nickname}</td>
-						<td>${vo.message_content}</td>
+						<td>
+							<a href="/dataro/member/myPage">
+							${vo.message_content}
+							</a>
+						</td>
 						<td><input type="checkbox" class="messagecheck" name="message_no" value="${vo.message_no }"></td>
 					</tr>
 				</c:forEach>

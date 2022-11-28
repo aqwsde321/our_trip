@@ -12,7 +12,7 @@
 <meta name="format-detection" content="telephone=no, address=no, email=no">
 <meta name="keywords" content="">
 <meta name="description" content="">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/contents.css"/>
@@ -34,7 +34,7 @@
 						<dl>
 							<dt>${data.title } </dt>
 							<dd class="date" style="text-align:left;">
-							작성자 ${data.id } <br>
+							작성자 <a class="btn-sendclick" href="javascript:message(${data.member_no }, '${data.id }')">${data.id }</a> <br>
 							작성일  <fmt:formatDate value="${data.writedate }" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 							<c:if test="${!empty data.updatedate }">
 							수정일  <fmt:formatDate value="${data.updatedate }" pattern="yyyy-MM-dd HH:mm:ss"/>

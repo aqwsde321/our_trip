@@ -6,16 +6,18 @@
 		<a class="btn-msgclose" href="javascript:">
 			<img src="/resources/dataro/img/close.png">
 		</a>
-		<h3>Send Message<img src="/resources/dataro/img/message.png"></h3>
-		<input type="hidden" id="send_member_no" name="send_member_no" value="${loginInfo.member_no }">
-		<input type="hidden" id="receive_member_no" name="receive_member_no" value="">
-		보내는 사람 
-		<input type="text" name="send_member_id" value="${loginInfo.id }" readonly>
-		<br> 받는 사람 
-		<input type="text" name="receive_member_id" id="receive_member_id" value="" readonly>
-		<input type="text" id="message_content" placeholder="보낼 메세지를 입력하세요." style="width: 100%">
+		<h3>Send Message <img src="/resources/dataro/img/message.png"></h3>
+		<div style="padding:5px;">
+			<input type="hidden" id="send_member_no" name="send_member_no" value="${loginInfo.member_no }">
+			<input type="hidden" id="receive_member_no" name="receive_member_no" value="">
+			<b>To</b> 
+			<input type="text"style="margin:5px;" name="receive_member_id" id="receive_member_id" value="" readonly>
+			<br><b>From</b> 
+			<input type="text" style="margin:5px;" name="send_member_id" value="${loginInfo.id }" readonly>
+			<input type="text" id="message_content" placeholder="보낼 메세지를 입력하세요." style="width: 100%">
+		</div>
 		<div style="padding-top:5px;">
-			<a class="btn-send" href="javascript:sendMessage();">보내기</a>
+			<a class="btn-send" href="javascript:sendMessage();"><b>Send</b></a>
 		</div>
 	</div>
 </div>
@@ -27,8 +29,10 @@
 			<img src="/resources/dataro/img/close.png">
 		</a>
 		<h3>Edit Reply</h3>
-		<input type="text" id="replyUpdate" placeholder="수정할 내용을 입력하세요." style="width: 100%">
-		<input type="hidden" id="modal_rno" value="">
+		<div style="padding:5px;">
+			<input type="text" id="replyUpdate" placeholder="수정할 내용을 입력하세요." style="width: 100%">
+			<input type="hidden" id="modal_rno" value="">
+		</div>
 		<div style="padding-top:5px;">
 			<a class="btn-edit" href="javascript:replyEdit();">수정</a>
 		</div>

@@ -5,9 +5,9 @@
 	<select id="list" resultType="a.b.c.dataro.boardQna.QnaVO"> 
 		SELECT
 			* 
-	 		, (SELECT COUNT(*) FROM plike WHERE plike.board_name = '자유게시판' AND pqnaboard.board_no = plike.board_no) AS likecount 
-	 		, (SELECT COUNT(*) FROM pdislike WHERE pdislike.board_name = '자유게시판' AND pqnaboard.board_no = pdislike.board_no) AS dislikecount  
-			, (SELECT COUNT(*) FROM preply WHERE preply.board_name = '자유게시판' AND pqnaboard.board_no = preply.board_no) AS replycount 
+	 		, (SELECT COUNT(*) FROM plike WHERE plike.board_name = '질문게시판' AND pqnaboard.board_no = plike.board_no) AS likecount 
+	 		, (SELECT COUNT(*) FROM pdislike WHERE pdislike.board_name = '질문게시판' AND pqnaboard.board_no = pdislike.board_no) AS dislikecount  
+			, (SELECT COUNT(*) FROM preply WHERE preply.board_name = '질문게시판' AND pqnaboard.board_no = preply.board_no) AS replycount 
 		FROM pqnaboard
 		<where>
 			<if test= "stype != null or sword != null"> 
@@ -90,6 +90,12 @@
 	</update>
 		
 	<!-- 게시글 삭제 -->
+	<update id="qnaDelete" parameterType="int">
+		UPDATE pqnaboard SET board_no = #{board_no}*(-1), title='삭제된 글입니다.', content='삭제된 글입니다.' WHERE board_no = #{board_no}
+	</update>
+	<select id="gnoCount"  parameterType="int" resultType="int">
+		SELECT COUNT(gno) FROM pqnaboard WHERE gno = #{board_no}
+	</select>
 	<delete id="delete" parameterType="int">
 		DELETE FROM pqnaboard WHERE board_no = #{board_no}
 	</delete>

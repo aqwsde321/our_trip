@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>write</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -29,7 +29,7 @@
 							<p>${loginInfo.nickname }</p>
 						</span>
 						
-						<input type="text" name="title" id="title" class="title_text gmarket" value="코스 제목"  maxlength='12'>
+						<input type="text" name="title" id="title" class="title_text gmarket" value="" placeholder="제목" maxlength='12'>
 						<input type="hidden" name="board_name" id="title" class="title_text" value="여행게시판">
 					</div>
 					

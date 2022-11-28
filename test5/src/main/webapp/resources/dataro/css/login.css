@@ -1,6 +1,5 @@
 /*common*/
 #wrap{text-align: center;}
-#wrap .content{display: inline-block;width: 1200px;}
 /*login*/
 .login table{margin:70px 0 10px 0;}
 .login .list{margin:0 0 10px 0;}
@@ -37,13 +36,15 @@
 	overflow: visible;
 }
 
-#wrap .content table tr td{
+#wrap .trhov{
+	max-width:1000px;
+}    
+#wrap .content #area table tr td{
      white-space: nowrap; /*nowrap 줄바꿈을 하지 않음.*/
      overflow: hidden;
      text-overflow: ellipsis;
      padding: 5px 10px;
 }
-    
 #wrap .border {
 	padding-top: 20px;
 	border-radius: 20px;

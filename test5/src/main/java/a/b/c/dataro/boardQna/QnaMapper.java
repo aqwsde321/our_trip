@@ -24,6 +24,8 @@ public interface QnaMapper {
 	public int reply(QnaVO vo);
 
 	public int delete(int no);
+	public int qnaDelete(int no);
+	public int gnoCount(int no);
 	
 	public void updateViewcount(int no);
 	//댓글 좋아요

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DATARO</title>
+<title>OurTrip</title>
 <link href="/resources/dataro/css/reset.css" rel="stylesheet">
 <link href="/resources/dataro/css/style.css" rel="stylesheet">
 <link href="/resources/dataro/css/view.css" rel="stylesheet">
@@ -105,11 +105,8 @@
 								<tr>
 									<td>${status.index+1}</td>
 									<td>${room.room_title}
-										<c:if test="${empty room.room_pwd }">
-											<img src="/resources/dataro/img/openRoom.png">
-										</c:if>
 										<c:if test="${!empty room.room_pwd }">
-											<img src="/resources/dataro/img/secretRoom.png">
+											<img src="/resources/dataro/img/padlock.png">
 										</c:if>
 									</td>
 									<td>${room.roommaker_id}</td>
@@ -172,10 +169,13 @@
 		<a class="btn-roompwdclose" href="javascript:">
 			<img src="/resources/dataro/img/close.png">
 		</a>
-		
 		<h3>Enter Password</h3>
-		<input type="text" id="text_pwd" name="room_pwd">
-		<a class="btn-send" href="javascript:roomPwdCheck();">참여하기</a>
+		<div style="padding-top:5px;">
+			<input type="text" id="text_pwd" name="room_pwd">
+		</div>
+		<div style="padding-top:5px;">
+			<a class="btn-send" href="javascript:roomPwdCheck();">참여하기</a>
+		</div>
 	</div>
 </div>
 
@@ -306,7 +306,7 @@ function goSave() {
 function replyDel(no) {
 	if (confirm("댓글을 삭제하시겠습니까?")) {
 		$.ajax({
-			url: '/ro/reply/delete.do',
+			url: '/dataro/reply/delete.do',
 			type:'post',
 			data:{
 				reply_no : no

@@ -39,7 +39,13 @@
 <header class="sub_header">
 
 	<div class="content gmarket">
-		<h1><a href="/dataro/boardTravel/main.do">DATARO</a></h1>
+	<a href="/dataro/boardTravel/main.do">
+	<table style="width:150px; height:50px;color:white;">
+	<tr><td rowspan="2"><h1>아트</h1></td><td rowspan="3"><img src="/resources/dataro/img/traveller.png" style="height:50px;"></td></tr>
+	<tr></tr>
+	<tr><td style="font-size:12px;">Our Trip</tr>
+	</table>
+	</a>
 		<c:if test="${wordsearch == 1}">
 			<form id="frm" action="main.do" > 
 				<input type="hidden" name="stag" id="stag">
@@ -68,7 +74,7 @@
 				<a href="#" id="alarmForUser">
 					<i class="fa-solid fa-envelope"></i>
 				</a>
-					<span id="ChkNew" class="gmarket" style="font-size:3px; display:none;">new</span>
+					<span id="ChkNew" class="gmarket" style="font-size:3px; display:none; color:black;font-weight:bold ;">new</span>
 				<c:if test="${!empty loginInfo }">
 				<span class="btn_ex gmarket">새로운<br>쪽지<br><span id="unreadCount"></span>개</span>
 				</c:if>
@@ -91,6 +97,12 @@
 				</a>
 				<span class="btn_ex gmarket">여행<br>글쓰기</span>
 			</li>
+			<li>
+				<a href="/dataro/elastic/elastic.do" id="wBtn">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</a>
+				<span class="btn_ex gmarket">엘라스틱<br>서치</span>
+			</li>
 		</ul>
 	</div>
 </header>
@@ -100,7 +112,9 @@
 		<a class="btn-close" href="#none"><img src="/resources/dataro/img/close.png"></a>
 		<div id="areaForUser"></div>
 	</div>
-</div>	
+</div>
+
+
 
 <script>
 $(function(){
@@ -189,6 +203,11 @@ $('#alarmForUser').click(function(){
 		alert("로그인 후 이용해주세요 :)");
 	}
 });
+
+
+
+
+
 
 //상단 아이콘 호버시 말풍선 나오게
 $('.menu li').hover(function(){

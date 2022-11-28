@@ -13,14 +13,13 @@
 <div id="wrap">
 	<div class="content login border trhov">
 		<h2>참여한 채팅방</h2>
-		<div class="bbs" style="display:inline-block; height:200px; overflow-y:scroll;">
+		<div class="bbs" style="display:inline-block; height:200px; overflow-y:scroll; padding-top: 10px;">
 			<form method="post" name="Form" id="searchForm" action="">
 				<table class="list mpList">
 					<colgroup>
-						<col width="100px" />
+						<col width="150px" />
 						<col width="100px" />
 						<col width="*" />
-						<col width="100px" />
 						<col width="150px" />
 					</colgroup>
 					<thead>
@@ -29,7 +28,6 @@
 							<th>방 번호</th>
 							<th>방 제목</th>
 							<th>방장 아이디</th>
-							<th>방 만든 날짜</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,7 +42,6 @@
 								<td>${vo.room_no}</td>
 								<td class="titlee"><a href="javascript:joinRoomInMyPage(${vo.room_no});">${vo.room_title}</a></td>
 								<td>${vo.roommaker_id}</td>
-								<td>${vo.room_startdate }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

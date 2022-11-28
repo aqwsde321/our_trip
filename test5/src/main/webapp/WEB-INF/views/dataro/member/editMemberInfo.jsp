@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>editMemberInfo</title>
+<title>OurTrip</title>
 <link rel="stylesheet" href="/resources/dataro/css/reset.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/style.css"/>
 <link rel="stylesheet" href="/resources/dataro/css/login.css"/>
@@ -52,7 +52,7 @@
 					<td><div id="area3"></div></td>
 				</tr>
 				<tr>
-					<td><input type="file" name="filename"></td>
+					<td><input type="file" name="filename" onchange="readInputFile(this)"></td>
 				</tr>
 				<tr>
 					<td><h5>사진을 첨부하지 않으시면 기본이미지가 적용됩니다.</h5></td>

@@ -26,7 +26,7 @@ public class Test {
 	}
 	@GetMapping("/test2")
 	public void test2() {
-		 
+		
 	}
 	
 	// test2.jsp 파일 올리는거해뵈기
