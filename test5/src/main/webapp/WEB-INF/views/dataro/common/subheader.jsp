@@ -167,7 +167,7 @@ $('.menu li').hover(function(){
 
 // info modal
 $('#infoForUser').click(function(){
-	$("#areaForinfo").html('<iframe width="100%" height="800px" src="/resources/dataro/info.pdf"></iframe>');
+	$("#areaForinfo").html('<iframe width="100%" height="800px" src="/resources/dataro/artportfolio.pdf"></iframe>');
 	$('.infomodal').fadeIn();
 });
 
