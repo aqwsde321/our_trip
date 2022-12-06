@@ -11,7 +11,7 @@
 }
 .gmarket{font-family:GmarketSansMedium}/*폰트사용하고싶은사람 이클래스 태그에 붙이기*/
 /*subheader*/
-.sub_header{background:#a9c7d8; padding: 20px 0;color:#fff}
+.sub_header{background:#a9c7d8; padding: 20px 0;color:#fff;min-width:1360px;}
 .sub_header .content{display:flex !important;justify-content: space-between;margin:0 auto}
 .sub_header .content h1 a{display:inline-block;color:#fff}
 .sub_header .content ul li{position:relative;vertical-align: middle;margin-left:32px;}
