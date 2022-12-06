@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 /* 모달ㅋ */
-.alarmmodal {
+.alarmmodal, .infomodal {
 	z-index: 2;
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.4);
@@ -29,6 +29,20 @@
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 	text-align: center;
 }
+
+.modal-infocontent{
+	background-color: #fff;
+	width: 1360px;
+	border-radius: 10px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	padding: 30px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+	text-align: center;
+}
+
 .btn-close{
 	position: absolute;
 	top: 10px;
@@ -74,9 +88,9 @@
 				<a href="#" id="alarmForUser">
 					<i class="fa-solid fa-envelope"></i>
 				</a>
-					<span id="ChkNew" class="gmarket" style="font-size:3px; display:none; color:black;font-weight:bold ;">new</span>
+				<span id="ChkNew" class="gmarket" style="font-size:3px; display:none; color:black;font-weight:bold ;">new</span>
 				<c:if test="${!empty loginInfo }">
-				<span class="btn_ex gmarket">새로운<br>쪽지<br><span id="unreadCount"></span>개</span>
+					<span class="btn_ex gmarket">새로운<br>쪽지<br><span id="unreadCount"></span>개</span>
 				</c:if>
 			</li>
 			<li>
@@ -103,6 +117,12 @@
 				</a>
 				<span class="btn_ex gmarket">엘라스틱<br>서치</span>
 			</li>
+			<li>
+				<a href="#" id="infoForUser">
+					<i class="fa-solid fa-circle-info"></i>
+				</a>
+				<span class="btn_ex gmarket">info</span>
+			</li>
 		</ul>
 	</div>
 </header>
@@ -114,7 +134,12 @@
 	</div>
 </div>
 
-
+<div class="infomodal">
+	<div class="modal-infocontent">
+		<a class="btn-close" href="#none"><img src="/resources/dataro/img/close.png"></a>
+		<div id="areaForinfo"></div>
+	</div>
+</div>
 
 <script>
 $(function(){
@@ -124,6 +149,30 @@ $(function(){
 	</c:if>
 });
 
+//미로그인시 아이콘 클릭시 뜨는 얼럿
+function loginAlert(){
+	alert("로그인 후 이용해주세요 :)");
+}
+//로그인 후 변경된 사진 클릭시 마이페이지로 가기
+$('#idIm').click(function(){
+	location.href="/dataro/member/myPage";
+});
+
+//상단 아이콘 호버시 말풍선 나오게
+$('.menu li').hover(function(){
+	$(this).find(".btn_ex").stop().fadeIn()
+},function(){
+	$(".btn_ex").stop().fadeOut();
+})
+
+// info modal
+$('#infoForUser').click(function(){
+	$("#areaForinfo").html('<iframe width="100%" height="800px" src="/resources/dataro/info.pdf"></iframe>');
+	$('.infomodal').fadeIn();
+});
+
+/* 쪽지 관련 [시작] */
+// 안읽은 쪽지 있는지 숫자로 띄움
 function unreadCount(){
 	$.ajax({
 		url : '/dataro/message/getUnread.do',
@@ -140,6 +189,7 @@ function unreadCount(){
 	});
 }
 
+// 로그인 중 새로운 쪽지 오면 표시
 var pre_cnt= -1;
 <c:if test="${!empty loginInfo}">
 	pre_cnt= ${msg_cnt};
@@ -164,24 +214,7 @@ function ChkNewMsg(){
 			setTimeout(ChkNewMsg,3000);
 	    }
 	});
-	
 }
-// X 버튼 클릭시 닫힘
-$('.btn-close').click(function(){
-	$('.alarmmodal').fadeOut();
-});	
-
-// .modal밖에 클릭시 닫힘
-$(".alarmmodal").click(function (e) {
-	if (e.target.className == "alarmmodal") {
-		$(".alarmmodal").hide();
-	}
-});
-
-// 로그인 후 변경된 사진 클릭시 마이페이지로 가기
-$('#idIm').click(function(){
-	location.href="/dataro/member/myPage";
-});
 
 // 종 아이콘 클릭시 읽지 않은 쪽지 모달팝업
 $('#alarmForUser').click(function(){
@@ -203,21 +236,23 @@ $('#alarmForUser').click(function(){
 		alert("로그인 후 이용해주세요 :)");
 	}
 });
+/* 쪽지 관련 [끝] */
 
+//.modal밖에 클릭시 닫힘
+$(".alarmmodal").click(function (e) {
+	if (e.target.className == "alarmmodal") {
+		$(".alarmmodal").hide();
+	}
+});
+$(".infomodal").click(function (e) {
+	if (e.target.className == "infomodal") {
+		$(".infomodal").hide();
+	}
+});
+//X 버튼 클릭시 닫힘
+$('.btn-close').click(function(){
+	$('.alarmmodal').fadeOut();
+	$('.infomodal').fadeOut();
+});	
 
-
-
-
-
-//상단 아이콘 호버시 말풍선 나오게
-$('.menu li').hover(function(){
-	$(this).find(".btn_ex").stop().fadeIn()
-},function(){
-	$(".btn_ex").stop().fadeOut();
-})
-
-// 미로그인시 아이콘 클릭시 뜨는 얼럿
-function loginAlert(){
-	alert("로그인 후 이용해주세요 :)");
-}
 </script>

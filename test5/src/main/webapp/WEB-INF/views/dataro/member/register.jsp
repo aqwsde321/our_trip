@@ -72,9 +72,8 @@
 <script type='text/javascript' src="/resources/dataro/js/register.js"></script>
 <script>
 // 아이디 중복체크 
-var id;
 $('#id').focusout(function(){
-	id = $('#id').val().trim();
+	var id = $('#id').val().trim();
 	checkID = false;
 	if (id === '' ){
 		$("#area1").html('아이디를 입력해주세요.').css('color','red').css('font-size','small');

@@ -46,7 +46,7 @@
 							<tr>
 								<th>첨부파일</th>
 								<td>
-								<input type="file" name="filename">
+									<input type="file" name="filename" onchange="readInputFile(this)">
 								</td>
 							</tr>
 						</tbody>
@@ -69,6 +69,24 @@ var editor;
 $(function(){
 	editor = setEditor('content');
 })
+
+//첨부파일에 추가한 사진미리보기
+function readInputFile(input){
+
+	// files 로 해당 파일 정보 얻기.
+	var file = input.files;
+
+	// file[0].name 은 파일명 입니다.
+	// 정규식으로 확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)) {
+		alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
+	}
+	
+	// 체크를 통과했다면 종료.
+	else return;
+
+	input.outerHTML = input.outerHTML;
+};
 </script>  
 </body>
 </html>

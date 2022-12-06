@@ -22,11 +22,9 @@ $('#pwd').focusout(function(){
 
 // 비밀번호 체크 함수
 var reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-var pw1;
-var pwd;
 function checkPw() {
-	pw1 = $('#pw1').val();
-	pwd = $('#pwd').val();
+	var pw1 = $('#pw1').val();
+	var pwd = $('#pwd').val();
 	checkPW = false;
 	if (pw1 === ''){
 		$("#area2").html('비밀번호를 입력해 주세요.').css('color','red').css('font-size','small');
@@ -84,13 +82,11 @@ $('#email2').focusout(function (){
 });
 
 // 이메일 중복 체크 함수
-var email;
-var email2;
 function checkEmail(){
 	$("#area3").html('');
 	checkEM = false;
-	email = $('#email').val();
-	email2 = $('#email2').val();
+	var email = $('#email').val();
+	var email2 = $('#email2').val();
 	if (email != '' && email2 != ''){
 		var emailT = email + '@'+ email2;
 		$.ajax({
@@ -131,13 +127,7 @@ function readInputFile(input){
 	}
 	
 	// 체크를 통과했다면 종료.
-	else {
-		return;
-	};
+	else return;
 	
-	// 체크에 걸리면 선택된  내용 취소 처리를 해야함.
-	// 파일선택 폼의 내용은 스크립트로 컨트롤 할 수 없습니다.
-	// 그래서 그냥 새로 폼을 새로 써주는 방식으로 초기화 합니다.
-	// 이렇게 하면 간단 !?
 	input.outerHTML = input.outerHTML;
 };
