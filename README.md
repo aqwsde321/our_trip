@@ -5,6 +5,3 @@ http://3.39.197.201:8080/
 
 https://docs.google.com/viewer?url=https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf
 
-
-<iframe src="https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf"></iframe>
-<pdf src="https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf">
