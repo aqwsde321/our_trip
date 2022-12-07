@@ -3,6 +3,8 @@
 ## 주소 변경됨. (엘라스틱서치 추가. 단 localhost에서만 가능)
 http://3.39.197.201:8080/
 
+[artportfolio.pdf](https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf)
+
 <img src="https://user-images.githubusercontent.com/109077040/206078501-f188ece1-b28a-4fe6-8a6f-5d6d57ee711c.PNG">
 <img src="https://user-images.githubusercontent.com/109077040/206078505-b421ee31-ca5f-4b8b-a6ab-3a78f2eb99b5.PNG">
 <img src="https://user-images.githubusercontent.com/109077040/206078508-bccc1994-981c-489e-bdd8-4819bb274055.PNG">
