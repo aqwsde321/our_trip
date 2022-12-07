@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fhit-counter)](https://hits.seeyoufarm.com)                    
+
 ### 주소 변경됨. (엘라스틱서치 추가. 단 localhost에서만 가능)
 http://3.39.197.201:8080/
 
