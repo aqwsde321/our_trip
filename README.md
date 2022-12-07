@@ -7,4 +7,4 @@ https://docs.google.com/viewer?url=https://github.com/aqwsde321/pj_public_test/f
 
 
 <iframe src="https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf"></iframe>
-<img src="https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf">
+<pdf src="https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf">
