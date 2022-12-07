@@ -2,6 +2,9 @@
 
 ## 주소 변경됨. (엘라스틱서치 추가. 단 localhost에서만 가능)
 http://3.39.197.201:8080/
+
+[artportfolio.pdf](https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf)
+
 <!-- ![슬라이드1](https://user-images.githubusercontent.com/109077040/206078501-f188ece1-b28a-4fe6-8a6f-5d6d57ee711c.PNG)
 ![슬라이드2](https://user-images.githubusercontent.com/109077040/206078505-b421ee31-ca5f-4b8b-a6ab-3a78f2eb99b5.PNG)
 ![슬라이드3](https://user-images.githubusercontent.com/109077040/206078508-bccc1994-981c-489e-bdd8-4819bb274055.PNG)
@@ -23,9 +26,6 @@ http://3.39.197.201:8080/
 ![슬라이드19](https://user-images.githubusercontent.com/109077040/206078545-c52af6b6-9e6e-46b6-955f-0b1529863631.PNG)
 ![슬라이드20](https://user-images.githubusercontent.com/109077040/206078547-8354e736-3729-4f12-ac98-d8e460938a30.PNG)
 <!-- ![슬라이드21](https://user-images.githubusercontent.com/109077040/206078548-8edfed10-6d93-4ef0-b331-51983801bdd1.PNG) -->
-
-
-[artportfolio.pdf](https://github.com/aqwsde321/pj_public_test/files/10172355/artportfolio.pdf)
 
 <!-- <img src="https://user-images.githubusercontent.com/109077040/206078501-f188ece1-b28a-4fe6-8a6f-5d6d57ee711c.PNG">
 <img src="https://user-images.githubusercontent.com/109077040/206078505-b421ee31-ca5f-4b8b-a6ab-3a78f2eb99b5.PNG">
