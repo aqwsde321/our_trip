@@ -2,7 +2,7 @@
 
 여행코스 공유 커뮤니티 / 오목
 
-### 주소 변경됨. (엘라스틱서치 추가. 단 localhost에서만 가능)
+### 엘라스틱서치 추가(단 localhost에서만 가능).
 http://3.39.197.201:8080/
 
 [artportfolio.pdf](https://github.com/aqwsde321/pj_public_test/files/10202043/artportfolio.pdf)
