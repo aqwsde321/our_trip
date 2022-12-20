@@ -14,7 +14,6 @@ http://3.39.197.201:8080/
 ![슬라이드15](https://user-images.githubusercontent.com/109077040/206901377-1ebecb21-8050-409a-9f93-e2c5730c5b61.PNG)
 ![슬라이드16](https://user-images.githubusercontent.com/109077040/206901378-20b1ba91-debd-49ca-b044-8f09a5cc337c.PNG)
 ![슬라이드17](https://user-images.githubusercontent.com/109077040/206901379-1f27f10e-1590-42af-9ce1-934292d9b99c.PNG)
-![슬라이드18](https://user-images.githubusercontent.com/109077040/206901383-7384c947-fdc9-4dce-823a-ce574432a4c7.PNG)
+![슬라이드18](https://user-images.githubusercontent.com/109077040/208650125-a8cd35b7-3475-4d53-9c96-aafe033ff657.PNG)
 ![슬라이드19](https://user-images.githubusercontent.com/109077040/206901385-d556adc0-127e-4a12-b64b-2e16a282fae4.PNG)
-![슬라이드20](https://user-images.githubusercontent.com/109077040/206901386-b0e3147f-4a91-4b22-80a3-4548975df02f.PNG)
-
+![슬라이드20](https://user-images.githubusercontent.com/109077040/208650049-03d59b21-036c-4956-8f5e-9c8bb4457121.PNG)
